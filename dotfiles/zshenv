@@ -33,4 +33,3 @@ export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
 # Golang stuff
 export GOPATH=$HOME/workspace
 export PATH="$PATH:$HOME/.rvm/bin:$GOPATH/bin" # Add RVM to PATH for scripting
-
