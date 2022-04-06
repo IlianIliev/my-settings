@@ -1,1 +1,29 @@
+export ZSH=/Users/ilian/.oh-my-zsh
+
 ZSH_THEME="my-theme"
+
+plugins=(git wd zsh-syntax-highlighting nvm)
+
+source $ZSH/oh-my-zsh.sh
+
+eval "$(direnv hook zsh)"
+
+
+# Needed for openssl
+export LDFLAGS="-L/usr/local/opt/openssl/lib"
+export CPPFLAGS="-I/usr/local/opt/openssl/include"
+
+export NVM_DIR=~/.nvm
+
+export GOPRIVATE=github.com/lifesum/*
+
+# virtualenvwrapper settings
+export WORKON_HOME=~/.virtualenvs
+export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
+source /Users/ilian/Library/Python/3.8/bin/virtualenvwrapper.sh
+
+
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# Mapping the CapsLock to Play/Pause button so I can use it with an external keyboard
+hidutil property --set '{"UserKeyMapping":[{"HIDKeyboardModifierMappingSrc":0x000700000039, "HIDKeyboardModifierMappingDst":0x000C000000CD}]}'
