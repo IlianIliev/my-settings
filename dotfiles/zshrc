@@ -15,6 +15,9 @@ export CPPFLAGS="-I/usr/local/opt/openssl/include"
 
 export NVM_DIR=~/.nvm
 
+# Golang stuff
+export GOPATH=$HOME/workspace
+export PATH="$PATH:$HOME/.rvm/bin:$GOPATH/bin" # Add RVM to PATH for scripting
 export GOPRIVATE=github.com/lifesum/*
 
 # virtualenvwrapper settings
@@ -27,3 +30,13 @@ source /Users/ilian/Library/Python/3.8/bin/virtualenvwrapper.sh
 
 # Mapping the CapsLock to Play/Pause button so I can use it with an external keyboard
 hidutil property --set '{"UserKeyMapping":[{"HIDKeyboardModifierMappingSrc":0x000700000039, "HIDKeyboardModifierMappingDst":0x000C000000CD}]}'
+
+# Localstack alias
+# default region should be us-east-1
+alias awslocal="AWS_ACCESS_KEY_ID=XXX AWS_SECRET_ACCESS_KEY=XXX AWS_DEFAULT_REGION=${DEFAULT_REGION:-$AWS_DEFAULT_REGION} aws --endpoint-url=http://${LOCALSTACK_HOST:-localhost}:4566"
+
+
+# GPG commits signing
+export GPG_TTY=$(tty)
+git config --global gpg.program gpg
+git config --global commit.gpgsign true
