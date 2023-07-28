@@ -12,5 +12,8 @@ ln -s ~/workspace/my-settings/dotfiles/zshenv ~/.zshenv
 
 cd ~/.oh-my-zsh/plugins
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
-
 ```
+
+### Adding startup commands
+
+Add `dotfiles/startup.sh` to System Preferences > Users & Groups > Login items
