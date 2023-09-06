@@ -8,6 +8,8 @@ source $ZSH/oh-my-zsh.sh
 
 eval "$(direnv hook zsh)"
 
+setopt extended_glob
+
 
 # Needed for openssl
 export LDFLAGS="-L/usr/local/opt/openssl/lib"
@@ -23,20 +25,36 @@ export GOPRIVATE=github.com/lifesum/*
 # virtualenvwrapper settings
 export WORKON_HOME=~/.virtualenvs
 export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
-source /Users/ilian/Library/Python/3.8/bin/virtualenvwrapper.sh
+source virtualenvwrapper.sh
+
+# poetry stuff
+export PATH="$HOME/.local/bin:$PATH"
 
 
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# Mapping the CapsLock to Play/Pause button so I can use it with an external keyboard
-hidutil property --set '{"UserKeyMapping":[{"HIDKeyboardModifierMappingSrc":0x000700000039, "HIDKeyboardModifierMappingDst":0x000C000000CD}]}'
 
 # Localstack alias
 # default region should be us-east-1
-alias awslocal="AWS_ACCESS_KEY_ID=XXX AWS_SECRET_ACCESS_KEY=XXX AWS_DEFAULT_REGION=${DEFAULT_REGION:-$AWS_DEFAULT_REGION} aws --endpoint-url=http://${LOCALSTACK_HOST:-localhost}:4566"
+export LOCALSTACK_HOST=localstack
+alias awslocal="AWS_ACCESS_KEY_ID=XXX AWS_SECRET_ACCESS_KEY=XXX AWS_DEFAULT_REGION=\$AWS_DEFAULT_REGION aws --endpoint-url=http://\$LOCALSTACK_HOST:4566"
 
 
 # GPG commits signing
 export GPG_TTY=$(tty)
 git config --global gpg.program gpg
 git config --global commit.gpgsign true
+
+
+# Adding simple function to generate go mocks
+gomock() {
+    if [[ $# -gt 0 ]]
+      then
+        fileName=$(echo $1 | sed -e "s/.go$//")
+        packageName=$(grep '^package .*$' $1 | sed -E 's/package //')
+        mockgen -source=$fileName.go -package=$packageName -destination=${fileName}_mock.go
+        echo "Done."
+      else
+        echo No file name provided
+    fi
+}
