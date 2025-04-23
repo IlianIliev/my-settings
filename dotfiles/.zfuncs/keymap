@@ -1,0 +1,14 @@
+# Custom keyboard mapping
+set_custom_keymap()
+{
+    # mapping the §/± to `/~ (backtick/tilde) - this is useful for Mac internal keyboard
+    # Mapping the CapsLock to Play/Pause button so I can use it with an external keyboard
+    echo "Setting custom key map"
+    hidutil property --set '{"UserKeyMapping":[{"HIDKeyboardModifierMappingSrc":0x700000064,"HIDKeyboardModifierMappingDst":0x700000035}, {"HIDKeyboardModifierMappingSrc":0x000700000039, "HIDKeyboardModifierMappingDst":0x000C000000CD}]}'
+}
+
+reset_custom_keymap()
+{
+    hidutil property --set '{"UserKeyMapping":[]}'
+    unset CUSTOM_KEY_MAP
+}

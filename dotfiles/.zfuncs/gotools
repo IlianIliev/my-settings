@@ -1,0 +1,17 @@
+# Adding simple function to generate go mocks
+
+gomock() {
+    if [[ $# -gt 0 ]]
+      then
+        fileName=$(echo $1 | sed -e "s/.go$//")
+        packageName=$(grep '^package .*$' $1 | sed -E 's/package //')
+        mockgen -source=$fileName.go -package=$packageName -destination=${fileName}_mock.go
+        echo "Done."
+      else
+        echo No file name provided
+    fi
+}
+
+govendorupdate() {
+    go get -u ./... && go mod tidy && go mod vendor
+}

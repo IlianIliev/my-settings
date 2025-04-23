@@ -6,6 +6,7 @@ export LC_ALL=en_US.UTF-8
 
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=/Users/ilian/workspace
+export PATH=~/Library/Python/3.9/bin/:$PATH  # needed to use virtualenv
 source /usr/local/bin/virtualenvwrapper.sh
 
 

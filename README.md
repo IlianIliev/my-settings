@@ -9,6 +9,7 @@ Contains a bunch of settings I use for my machine
 ```
 ln -s ~/workspace/my-settings/dotfiles/my-theme.zsh-theme $ZSH/themes/my-theme.zsh-theme
 ln -s ~/workspace/my-settings/dotfiles/zshenv ~/.zshenv
+ln -s ~/workspace/my-settings/dotfiles/.zfuncs ~/.zfuncs
 
 cd ~/.oh-my-zsh/plugins
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git

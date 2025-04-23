@@ -1,0 +1,10 @@
+# Adding simple function to connect to a running K8s pod
+
+kexec() {
+    if [[ $# -gt 0 ]]
+      then
+        kubectl exec -it $1 -- /bin/bash
+      else
+        echo No pod name provided
+    fi
+}
